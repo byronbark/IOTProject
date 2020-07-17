@@ -1,5 +1,5 @@
 # IOTProject
-TSP IoT Research Project
+TSP IoT Research Project as outlined by topic paper
 
 # 'BarkhuizenSurveyTL'
 An iterative report on the current state of the art of transfer learning, methods for its application and some use cases.
