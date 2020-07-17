@@ -1,6 +1,9 @@
 # IOTProject
 TSP IoT Research Project as outlined by topic paper
 
+# PCAP Manipulation
+Contains script and .py files for conversion of .pcap files into sessions and then images to be fed into a neural network (if used)
+
 # 'BarkhuizenSurveyTL'
 An iterative report on the current state of the art of transfer learning, methods for its application and some use cases.
 
