@@ -1,10 +1,3 @@
-# Wei Wang (ww8137@mail.ustc.edu.cn)
-#
-# This Source Code Form is subject to the terms of the Mozilla Public
-# License, v. 2.0. If a copy of the MPL was not distributed with this file, You
-# can obtain one at http://mozilla.org/MPL/2.0/.
-# ==============================================================================
-
 $SESSIONS_COUNT_LIMIT_MIN = 0
 $SESSIONS_COUNT_LIMIT_MAX = 60000
 $TRIMED_FILE_LEN = 784
@@ -41,7 +34,7 @@ foreach($d in $dirs)
     }
 }
 
-echo "All files will be trimed to $TRIMED_FILE_LEN length and if it's even shorter we'll fill the end with 0x00..."
+echo "All files will be trimed to $TRIMED_FILE_LEN length and if it's even shorter pad with 0x00"
 
 $paths = @(('3_ProcessedSession\FilteredSession\Train', '3_ProcessedSession\TrimedSession\Train'), ('3_ProcessedSession\FilteredSession\Test', '3_ProcessedSession\TrimedSession\Test'))
 foreach($p in $paths)
