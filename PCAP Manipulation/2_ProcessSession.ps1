@@ -1,7 +1,7 @@
 $SESSIONS_COUNT_LIMIT_MIN = 0
 $SESSIONS_COUNT_LIMIT_MAX = 60000
 $TRIMED_FILE_LEN = 784
-$SOURCE_SESSION_DIR = "Flow\L7"
+$SOURCE_SESSION_DIR = "2_Session\L7"
 
 echo "If Sessions more than $SESSIONS_COUNT_LIMIT_MAX we only select the largest $SESSIONS_COUNT_LIMIT_MAX."
 echo "Finally Selected Sessions:"
@@ -34,7 +34,7 @@ foreach($d in $dirs)
     }
 }
 
-echo "All files will be trimed to $TRIMED_FILE_LEN length and if it's even shorter pad with 0x00"
+echo "All files will be trimed to $TRIMED_FILE_LEN length and if it's even shorter we'll fill the end with 0x00..."
 
 $paths = @(('3_ProcessedSession\FilteredSession\Train', '3_ProcessedSession\TrimedSession\Train'), ('3_ProcessedSession\FilteredSession\Test', '3_ProcessedSession\TrimedSession\Test'))
 foreach($p in $paths)
