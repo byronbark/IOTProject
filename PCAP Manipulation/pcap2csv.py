@@ -10,12 +10,7 @@ from scapy.layers.inet import IP, UDP, TCP
 #--------------------------------------------------
 
 def render_csv_row(pkt_sh, pkt_sc, fh_csv):
-    """Write one packet entry into the CSV file.
-    pkt_sh is the PyShark representation of the packet
-    pkt_sc is a 'bytes' representation of the packet as returned from
-    scapy's RawPcapReader
-    fh_csv is the csv file handle
-    """
+    """Write row into csv using combined pyshark and scapy returns (they hold different information)"""
     ether_pkt_sc = Ether(pkt_sc)
     if ether_pkt_sc.type != 0x800:
         print('Ignoring non-IP packet')
@@ -42,20 +37,8 @@ def render_csv_row(pkt_sh, pkt_sc, fh_csv):
 
     # Each line of the CSV has this format
     fmt = '{0}|{1}|{2}({3})|{4}|{5}:{6}|{7}:{8}|{9}|{10}'
-    #       |   |   |   |    |   |   |   |   |   |   |
-    #       |   |   |   |    |   |   |   |   |   |   o-> {10} L4 payload hexdump
-    #       |   |   |   |    |   |   |   |   |   o-----> {9}  total pkt length
-    #       |   |   |   |    |   |   |   |   o---------> {8}  dst port
-    #       |   |   |   |    |   |   |   o-------------> {7}  dst ip address
-    #       |   |   |   |    |   |   o-----------------> {6}  src port
-    #       |   |   |   |    |   o---------------------> {5}  src ip address
-    #       |   |   |   |    o-------------------------> {4}  text description
-    #       |   |   |   o------------------------------> {3}  L4 protocol
-    #       |   |   o----------------------------------> {2}  highest protocol
-    #       |   o--------------------------------------> {1}  time
-    #       o------------------------------------------> {0}  frame number
 
-    # Example:
+    # Example CSV Entry:
     # 1|0.0|DNS(UDP)|Standard query 0xf3de A www.cisco.com|192.168.1.116:57922|1.1.1.1:53|73|f3de010000010000000000000377777705636973636f03636f6d0000010001
 
     print(fmt.format(pkt_sh.no,               # {0}
@@ -75,19 +58,7 @@ def render_csv_row(pkt_sh, pkt_sc, fh_csv):
     #--------------------------------------------------
 
 def pcap2csv(in_pcap, out_csv):
-    """Main entry function called from main to process the pcap and
-    generate the csv file.
-    in_pcap = name of the input pcap file (guaranteed to exist)
-    out_csv = name of the output csv file (will be created)
-    This function walks over each packet in the pcap file, and for
-    each packet invokes the render_csv_row() function to write one row
-    of the csv.
-    """
-
-    # Open the pcap file with PyShark in "summary-only" mode, since this
-    # is the mode where the brief textual description of the packet (e.g.
-    # "Standard query 0xf3de A www.cisco.com", "Client Hello" etc.) are
-    # made available.
+    #Open pcap with pshark in readonly mode
     pcap_pyshark = pyshark.FileCapture(in_pcap, only_summaries=True)
     pcap_pyshark.load_packets()
     pcap_pyshark.reset()
@@ -95,10 +66,7 @@ def pcap2csv(in_pcap, out_csv):
     frame_num = 0
     ignored_packets = 0
     with open(out_csv, 'w') as fh_csv:
-        # Open the pcap file with scapy's RawPcapReader, and iterate over
-        # each packet. In each iteration get the PyShark packet as well,
-        # and then call render_csv_row() with both representations to generate
-        # the CSV row.
+        # Use scapy rawpcapreader utility
         for (pkt_scapy, _) in RawPcapReader(in_pcap):
             try:
                 pkt_pyshark = pcap_pyshark.next_packet()
@@ -106,8 +74,6 @@ def pcap2csv(in_pcap, out_csv):
                 if not render_csv_row(pkt_pyshark, pkt_scapy, fh_csv):
                     ignored_packets += 1
             except StopIteration:
-                # Shouldn't happen because the RawPcapReader iterator should also
-                # exit before this happens.
                 break
 
     print('{} packets read, {} packets not written to CSV'.
