@@ -7,7 +7,7 @@ Contains script and .py files for conversion of .pcap files into sessions by MAC
 # TLDomainAdaptation
 A python implementation of the transfer learning protocol outlined in paper (number later) applied to MNIST datasets. This will be adapted to our network traffic images as well as network traffic CSV files to explore their success to a baseline.
 
-# 'TL_Barkhuizen'
+# "TL_Barkhuizen"
 An iterative report on the current state of the art of transfer learning, methods for its application and some use cases.
 
 7/08/20: Results from applying transfer learning alongside a one class SVM classifier on image and CSV dataset to be added.
