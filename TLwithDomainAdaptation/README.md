@@ -2,4 +2,4 @@
 
 ##Architecture View
 
-![](images/pvznFl2.png?raw=true)
+image:: https://github.com/byronbark/IOTProject/blob/master/TLwithDomainAdaptation/pvznFl2.png
