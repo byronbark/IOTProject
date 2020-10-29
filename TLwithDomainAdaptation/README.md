@@ -2,4 +2,4 @@
 
 ##Architecture View
 
-![](images/table%20pvznFl2.png)
+![](images/pvznFl2.png)
