@@ -1,7 +1,14 @@
+# Wei Wang (ww8137@mail.ustc.edu.cn)
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this file, You
+# can obtain one at http://mozilla.org/MPL/2.0/.
+# ==============================================================================
+
 $SESSIONS_COUNT_LIMIT_MIN = 0
 $SESSIONS_COUNT_LIMIT_MAX = 60000
 $TRIMED_FILE_LEN = 784
-$SOURCE_SESSION_DIR = "2_Session\L7"
+$SOURCE_SESSION_DIR = "Flow\L7"
 
 echo "If Sessions more than $SESSIONS_COUNT_LIMIT_MAX we only select the largest $SESSIONS_COUNT_LIMIT_MAX."
 echo "Finally Selected Sessions:"
