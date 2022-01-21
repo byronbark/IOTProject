@@ -13,7 +13,7 @@ google-pasta==0.2.0
 grpcio==1.32.0
 h5py==2.10.0
 idna==2.10
-ipython==7.18.1
+ipython==7.31.1
 ipython-genutils==0.2.0
 jedi==0.17.2
 joblib==0.17.0
